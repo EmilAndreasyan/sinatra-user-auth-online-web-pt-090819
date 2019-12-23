@@ -6,7 +6,7 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, "secret"
   end
-  
+
   get '/' do
     erb :home
   end
@@ -20,11 +20,10 @@ class ApplicationController < Sinatra::Base
     @user = User.new(name: params["name"], email: params["email"], password: params["password"])
     @user.save
     session[:user_id] = @user.id
-    puts params
+
     redirect '/users/home'
   end
-  
-  
+
   get '/sessions/login' do
 
     # the line of code below render the view page in app/views/sessions/login.erb
@@ -37,7 +36,7 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = @user.id
       redirect '/users/home'
     end
-    redirect '/sessions/login'
+    redirect '/sessions/login' # redirects to the same place => does nothing
   end
 
   get '/sessions/logout' do
